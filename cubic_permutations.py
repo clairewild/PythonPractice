@@ -1,4 +1,4 @@
-# Finds all the permutaitons of a string
+# Finds all the permutations of a string
 def permutations(string):
 	if len(string) <= 1:
 		yield string
@@ -28,6 +28,3 @@ def cubic_permutations(n, min):
 			if cubes == n:
 				return x
 		x += 1
-	
-
-# Doesn't quite work, lots of repeat permutations!!!
