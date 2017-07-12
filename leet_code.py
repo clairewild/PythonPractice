@@ -3,7 +3,7 @@ class UndirectedGraphNode:
         self.label = x
         self.neighbors = []
 
-class Solution:
+class GraphCloneSolution:
     def cloneGraph(self, node):
         new_node = UndirectedGraphNode(node.label)
         nodes_dict = {}
@@ -23,3 +23,19 @@ class Solution:
                 nodes_dict[current_node.label].neighbors.append(nodes_dict[neighbor.label])
 
         return new_node
+
+
+class Solution(object):
+    def findMedianSortedArrays(self, nums1, nums2):
+        median1 = self.findMedian(nums1)
+        median2 = self.findMedian(nums2)
+        return (median1 + median2) / 2.0
+
+    def findMedian(nums):
+        if len(nums) % 2 == 0:
+            i = len(nums) / 2 - 1
+            j = len(nums) / 2
+            return (nums[i] + nums[j]) / 2.0
+        else:
+            i = int(len(nums) / 2)
+            return nums[i]
