@@ -25,13 +25,14 @@ class GraphCloneSolution:
         return new_node
 
 
-class Solution(object):
+class MedianSolution(object):
     def findMedianSortedArrays(self, nums1, nums2):
         median1 = self.findMedian(nums1)
         median2 = self.findMedian(nums2)
-        return (median1 + median2) / 2.0
+        res = (median1 + median2) / 2.0
+        return round(res, 1)
 
-    def findMedian(nums):
+    def findMedian(self, nums):
         if len(nums) % 2 == 0:
             i = len(nums) / 2 - 1
             j = len(nums) / 2
@@ -39,3 +40,28 @@ class Solution(object):
         else:
             i = int(len(nums) / 2)
             return nums[i]
+
+class BetterMedianSolution(object):
+    def findMedianSortedArrays(self, nums1, nums2):
+        arr = self.merge(nums1, nums2)
+        if len(arr) == 0:
+            return None
+        if len(arr) % 2 == 0:
+            i = len(arr) / 2 - 1
+            j = len(arr) / 2
+            return (arr[i] + arr[j]) / 2.0
+        else:
+            i = int(len(arr) / 2)
+            return arr[i]
+
+    def merge(self, nums1, nums2):
+        arr = []
+        while len(nums1) > 0 and len(nums2) > 0:
+            if nums1[0] <= nums2[0]:
+                arr.append(nums1.pop(0))
+            else:
+                arr.append(nums2.pop(0))
+        return arr + nums1 + nums2
+
+s = BetterMedianSolution()
+print(s.merge([1,2,3],[3,4,5]))
