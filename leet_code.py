@@ -62,6 +62,3 @@ class BetterMedianSolution(object):
             else:
                 arr.append(nums2.pop(0))
         return arr + nums1 + nums2
-
-s = BetterMedianSolution()
-print(s.merge([1,2,3],[3,4,5]))
