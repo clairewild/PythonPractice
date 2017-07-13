@@ -1,3 +1,4 @@
+# Clone an undirected graph
 class UndirectedGraphNode:
     def __init__(self, x):
         self.label = x
@@ -24,7 +25,7 @@ class GraphCloneSolution:
 
         return new_node
 
-
+# Find the median of two sorted arrays in O(logn) time complexity
 class MedianSolution(object):
     def findMedianSortedArrays(self, nums1, nums2):
         median1 = self.findMedian(nums1)
@@ -62,3 +63,37 @@ class BetterMedianSolution(object):
             else:
                 arr.append(nums2.pop(0))
         return arr + nums1 + nums2
+
+# Create an itterator that itterates over a BST
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class BSTIterator(object):
+    def __init__(self, root):
+        self.root = root
+        self.seen_vals = []
+
+    def hasNext(self):
+        if self.current_node or self.current_node.left:
+            return true
+        else:
+            return false
+
+    def next(self):
+
+        current_node = root
+        while current_node.left or current_node.right:
+            if current_node.left and current_node.left.val not in self.seen_vals:
+                current_node = current_node.left
+            else if current_node.right:
+                current_node = current_node.right
+        self.seen_vals.append(current_node.val)
+        return current_node.val
+
+
+# Your BSTIterator will be called like this:
+# i, v = BSTIterator(root), []
+# while i.hasNext(): v.append(i.next())

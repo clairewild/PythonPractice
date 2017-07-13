@@ -1,3 +1,4 @@
+# Draw a spiral
 class Spiral
   def initialize(size)
     @grid = []

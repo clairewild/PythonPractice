@@ -20,8 +20,7 @@ function tickets(peopleInLine){
   if (transactions == peopleInLine.length) {
     return "YES";
   }
-  else {return "NO";} 
-
+  else {return "NO";}
 
 // Takes a string and returns true if all parenthesis are paired correctly
 function groupCheck(s) {
@@ -51,7 +50,6 @@ function groupCheck(s) {
     }
   }
 }
- 
 
 // Checks to see if two strings are a pair of parenthesis
 function matchBrackets(one, two) {
@@ -68,7 +66,6 @@ function matchBrackets(one, two) {
     return false;
   }
 }
-  
 
 // Parenthesis version 2
 function validBraces(braces) {
@@ -90,7 +87,6 @@ function validBraces(braces) {
    }
 }
 
-
 // Takes an int and adds the digits, then adds the digits of the sum, until find one digit root
 function digital_root(n) {
   if (n < 10) {
@@ -106,7 +102,6 @@ function digital_root(n) {
   }
 }
 
-
 // Using a dictionary MORSE_CODE, takes a string of morse words separated by 3 spaces and returns a readable string
 decodeMorse = function(morseCode) {
   morseWords = morseCode.trim().split("   ");
@@ -120,7 +115,6 @@ decodeMorse = function(morseCode) {
   }
   return message.join("").trim();
 }
-
 
 // Takes an array of integers, and returns an object with arrays of the indexes and values of local peaks
 function pickPeaks(arr){
@@ -144,10 +138,9 @@ function pickPeaks(arr){
         }
       }
     });
-  }  
+  }
   return result;
 }
-
 
 // Takes a string, and returns an encoded string where every letter is shifted along 13 letter in alphabet
 function rot13(message){
@@ -165,5 +158,5 @@ function rot13(message){
       encoded.push(letter);
     }
   }
-  return encoded.join(""); 
+  return encoded.join("");
 }

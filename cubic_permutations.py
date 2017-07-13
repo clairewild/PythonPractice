@@ -7,7 +7,6 @@ def permutations(string):
 			for p in permutations(string[:i] + string[i+1:]):
 				yield string[i] + p
 
-
 # Checks to see if an integer is a perfect cube
 def is_cube(num):
 	x = num ** (1/3)
@@ -16,7 +15,6 @@ def is_cube(num):
 		return True
 	else:
 		return False
-
 
 # Finds the smallest cube, x, greater than min for which n perputations of digits are also cubes
 def cubic_permutations(n, min):
