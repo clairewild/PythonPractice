@@ -74,26 +74,31 @@ class TreeNode(object):
 class BSTIterator(object):
     def __init__(self, root):
         self.root = root
+        self.max = self.findMax
         self.seen_vals = []
 
+    def findMax(self):
+        current_node = self.root
+        while current_node.right:
+            current_node = current_node.right
+        return current_node
+
     def hasNext(self):
-        if self.current_node or self.current_node.left:
-            return true
-        else:
-            return false
+        return self.max not in self.seen_vals
 
     def next(self):
-
-        current_node = root
+        current_node = self.root
         while current_node.left or current_node.right:
-            if current_node.left and current_node.left.val not in self.seen_vals:
-                current_node = current_node.left
+            if current_node.left:
+                if current_node.left.val not in self.seen_vals:
+                    current_node = current_node.left
+                else if current_node.left.right and seen_vals[-1] == current_node.left.val:
+                    current_node = current_node.left
+
+            else if current_node.val not in self.seen_vals:
+                break
             else if current_node.right:
                 current_node = current_node.right
+
         self.seen_vals.append(current_node.val)
         return current_node.val
-
-
-# Your BSTIterator will be called like this:
-# i, v = BSTIterator(root), []
-# while i.hasNext(): v.append(i.next())
