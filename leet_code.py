@@ -64,7 +64,7 @@ class BetterMedianSolution(object):
                 arr.append(nums2.pop(0))
         return arr + nums1 + nums2
 
-# Create an itterator that itterates over a BST
+# Create an itterator that itterates over a BST and returns all elements in order
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
@@ -92,7 +92,7 @@ class BSTIterator(object):
             if current_node.left:
                 if current_node.left.val not in self.seen_vals:
                     current_node = current_node.left
-                else if current_node.left.right and seen_vals[-1] == current_node.left.val:
+                else if current_node.left.right and self.seen_vals[-1] == current_node.left.val:
                     current_node = current_node.left
 
             else if current_node.val not in self.seen_vals:
@@ -102,3 +102,24 @@ class BSTIterator(object):
 
         self.seen_vals.append(current_node.val)
         return current_node.val
+
+# Better BST itterator that returns next smallest value
+class BSTIterator(object):
+    def __init__(self, root):
+        # Create stack of all nodes down the left most side
+        self.stack = []
+        while root:
+            self.stack.append(root)
+            root = root.left
+
+    def hasNext(self):
+        return len(self.stack) > 0
+
+    def next(self):
+        node = self.stack.pop()
+        # Add nodes down the left most side from the right child of node being returned
+        x = node.right
+        while x:
+            self.stack.append(x)
+            x = x.left
+        return node.val
