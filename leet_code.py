@@ -92,12 +92,12 @@ class BSTIterator(object):
             if current_node.left:
                 if current_node.left.val not in self.seen_vals:
                     current_node = current_node.left
-                else if current_node.left.right and self.seen_vals[-1] == current_node.left.val:
+                elif current_node.left.right and self.seen_vals[-1] == current_node.left.val:
                     current_node = current_node.left
 
-            else if current_node.val not in self.seen_vals:
+            elif current_node.val not in self.seen_vals:
                 break
-            else if current_node.right:
+            elif current_node.right:
                 current_node = current_node.right
 
         self.seen_vals.append(current_node.val)
@@ -123,3 +123,39 @@ class BSTIterator(object):
             self.stack.append(x)
             x = x.left
         return node.val
+
+# Take a two dimentional array of 0's and 1's and return number of "islands" (adjacent sections of 1's)
+class IslandsSolution(object):
+    def numIslands(self, grid):
+        self.grid = grid
+        self.seen = {}
+        islands = 0
+        for row in range(0, len(self.grid)):
+            for col in range(0, len(self.grid[row])):
+                if self.grid[row][col] == 1 and (row, col) not in self.seen:
+                    islands += 1
+                    self.exploreIsland(row, col)
+        return islands
+
+    def exploreIsland(self, row, col):
+        if self.grid[row][col] == 0 or (row, col) in self.seen: return
+        self.seen[(row, col)] = True
+        for adj in self.adjacents(row, col):
+            self.exploreIsland(adj[0], adj[1])
+
+    def inBounds(self, row, col):
+        height = len(self.grid)
+        width = len(self.grid[0])
+        return 0 <= row < height and 0 <= col < width
+
+    def adjacents(self, row, col):
+        diffs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+        adjacents = map(lambda diff: [row + diff[0], col + diff[1]], diffs)
+        return filter(lambda pos: self.inBounds(pos[0], pos[1]), adjacents)
+
+# grid1 = [[1,1,1,1,0], [1,1,0,1,0], [1,1,0,0,0], [0,0,0,0,0]]
+# grid2 = [[1,1,0,0,0], [1,1,0,0,0], [0,0,1,0,0], [0,0,0,1,1]]
+#
+# i = IslandsSolution()
+# print(i.numIslands(grid1))
+# print(i.numIslands(grid2))
