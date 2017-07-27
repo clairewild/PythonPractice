@@ -58,6 +58,10 @@ def merge(intervals)
     if queue.empty?
       res << Interval.new(int.start)
       queue << int.end
+    elsif int.start <= res.last.end
+      if int.end > res.last.end
+        res.last.end = int.end
+      end
     elsif int.start <= queue.last
       queue << int.start
       if int.end >= queue.first
