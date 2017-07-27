@@ -40,3 +40,38 @@ def count_depth(node)
   end
   depth
 end
+
+# Take an array of intervals and merge any that overlap
+class Interval
+  attr_accessor :start, :end
+  def initialize(s = 0, e = 0)
+    @start = s
+    @end = e
+  end
+end
+
+def merge(intervals)
+  intervals.sort! { |x, y| x.start <=> y.start }
+  res = []
+  queue = []
+  intervals.each do |int|
+    if queue.empty?
+      res << Interval.new(int.start)
+      queue << int.end
+    elsif int.start <= queue.last
+      queue << int.start
+      if int.end >= queue.first
+        res.last.end = int.end
+        queue = []
+      else
+        queue << int.end
+      end
+    elsif int.start > queue.first
+      res.last.end = queue.first
+      res << Interval.new(int.start)
+      queue = [int.end]
+    end
+  end
+  res.last.end = queue.first unless queue.empty?
+  res
+end
